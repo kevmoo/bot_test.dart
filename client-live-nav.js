@@ -76,7 +76,8 @@ $$.MappedIterator = {"": "Iterator;_liblib$_current,_iterator,_f",
 
 $$.WhereIterable = {"": "Iterable;_iterable,_f",
   get$iterator: function(_) {
-    return $.WhereIterator$($.get$iterator$ax(this._iterable), this._f);
+    var t1 = this._iterable;
+    return $.WhereIterator$(t1.get$iterator(t1), this._f);
   }
 };
 
@@ -11005,14 +11006,13 @@ $.StringWrapper_wEo = new $.StringWrapper(",");
 $.PrecedenceInfo_43h = new $.PrecedenceInfo($.StringWrapper_wEo, 0, 44);
 $.EventStreamProvider_keydown = new $.EventStreamProvider("keydown");
 $.Keyword_uHn = new $.Keyword("implements", false, true, $.PrecedenceInfo_StringWrapper_keyword_0_107);
-$.JSArray_methods = $.JSArray.prototype;
+$.StringWrapper_ouN = new $.StringWrapper("=>");
 $.Keyword_Z2F = new $.Keyword("continue", false, false, $.PrecedenceInfo_StringWrapper_keyword_0_107);
 $.StringWrapper_string = new $.StringWrapper("string");
 $.PrecedenceInfo_StringWrapper_string_0_39 = new $.PrecedenceInfo($.StringWrapper_string, 0, 39);
 $.C_CloseToken = new $.CloseToken();
 $.StringWrapper_sxw = new $.StringWrapper("===");
 $.PrecedenceInfo_IQT = new $.PrecedenceInfo($.StringWrapper_sxw, 9, 134);
-$.StringWrapper_ouN = new $.StringWrapper("=>");
 $.StringWrapper_f5R = new $.StringWrapper("<=");
 $.PrecedenceInfo_0DX = new $.PrecedenceInfo($.StringWrapper_f5R, 10, 129);
 $.Keyword_0zn = new $.Keyword("case", false, false, $.PrecedenceInfo_StringWrapper_keyword_0_107);
@@ -11024,6 +11024,7 @@ $.Keyword_gkJ = new $.Keyword("var", false, false, $.PrecedenceInfo_StringWrappe
 $.StringWrapper_a9P = new $.StringWrapper("/");
 $.StringWrapper_int = new $.StringWrapper("int");
 $.PrecedenceInfo_StringWrapper_int_0_105 = new $.PrecedenceInfo($.StringWrapper_int, 0, 105);
+$.JSArray_methods = $.JSArray.prototype;
 $.StringWrapper_kUZ = new $.StringWrapper("/=");
 $.Keyword_Hzo = new $.Keyword("switch", false, false, $.PrecedenceInfo_StringWrapper_keyword_0_107);
 $.Keyword_Xu7 = new $.Keyword("on", true, false, $.PrecedenceInfo_StringWrapper_keyword_0_107);
@@ -11103,8 +11104,8 @@ $.Keyword_sBE = new $.Keyword("is", false, false, $.PrecedenceInfo_StringWrapper
 $.Keyword_jzL = new $.Keyword("native", true, false, $.PrecedenceInfo_StringWrapper_keyword_0_107);
 $.PrecedenceInfo_9UK = new $.PrecedenceInfo($.StringWrapper_RuW, 14, 46);
 $.Keyword_suG = new $.Keyword("finally", false, false, $.PrecedenceInfo_StringWrapper_keyword_0_107);
-$.Keyword_yrN = new $.Keyword("try", false, false, $.PrecedenceInfo_StringWrapper_keyword_0_107);
 $.Keyword_aZF = new $.Keyword("typedef", false, true, $.PrecedenceInfo_StringWrapper_keyword_0_107);
+$.Keyword_yrN = new $.Keyword("try", false, false, $.PrecedenceInfo_StringWrapper_keyword_0_107);
 $.Keyword_0 = new $.Keyword("external", false, true, $.PrecedenceInfo_StringWrapper_keyword_0_107);
 $.PrecedenceInfo_Dpp = new $.PrecedenceInfo($.StringWrapper_ouN, 0, 130);
 $.C_Link = new $.Link();
