@@ -123,8 +123,8 @@ void expectFutureComplete(Future future, [Action1 onComplete]) {
    assert(isError != null);
 
    if(isError) {
-     final AsyncError err = result;
-     registerException(err.error, err.stackTrace);
+     final err = result;
+     registerException(err, getAttachedStackTrace(err));
    }
 
    if(onComplete != null) {
@@ -138,11 +138,11 @@ void expectFutureComplete(Future future, [Action1 onComplete]) {
 </div>
 <div class="method"><h4 id="expectFutureFail">
 <button class="show-code">Code</button>
-void <strong>expectFutureFail</strong>(<a href="http://api.dartlang.org/dart_async/Future.html">Future</a> future, [<a href="bot/Action1.html">Action1</a> onException]) <a class="anchor-link" href="#expectFutureFail"
+void <strong>expectFutureFail</strong>(<a href="http://api.dartlang.org/dart_async/Future.html">Future</a> future, [void onException(error)]) <a class="anchor-link" href="#expectFutureFail"
               title="Permalink to expectFutureFail">#</a></h4>
 <div class="doc">
 <pre class="source">
-void expectFutureFail(Future future, [Action1&lt;AsyncError&gt; onException]) {
+void expectFutureFail(Future future, [void onException(error)]) {
  assert(future != null);
 
  final testWait = expectAsync2((bool isError, result) {
