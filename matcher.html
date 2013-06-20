@@ -58,7 +58,7 @@ const Matcher anything = const _IsAnything()
 </div>
 <div class="field"><h4 id="completes">
 <button class="show-code">Code</button>
-<a href="matcher/Matcher.html">Matcher</a>         <strong>completes</strong> <a class="anchor-link"
+final <a href="matcher/Matcher.html">Matcher</a>         <strong>completes</strong> <a class="anchor-link"
             href="#completes"
             title="Permalink to completes">#</a>
         </h4>
@@ -70,7 +70,7 @@ future completes, the actual expectation will run.</p>
 <p>To test that a Future completes with an exception, you can use <a class="crossref" href="matcher.html#throws">throws</a> and
 <a class="crossref" href="matcher.html#throwsA">throwsA</a>.</p>
 <pre class="source">
-Matcher completes = const _Completes(null, '')
+final Matcher completes = const _Completes(null, '')
 </pre>
 </div>
 </div>
@@ -1078,7 +1078,7 @@ void expect(actual, matcher, {String reason, FailureHandler failureHandler,
            bool verbose : false}) {
  matcher = wrapMatcher(matcher);
  bool doesMatch;
- var matchState = new MatchState();
+ var matchState = {};
  try {
    doesMatch = matcher.matches(actual, matchState);
  } catch (e, trace) {
@@ -1093,6 +1093,22 @@ void expect(actual, matcher, {String reason, FailureHandler failureHandler,
    }
    failureHandler.failMatch(actual, matcher, reason, matchState, verbose);
  }
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="addStateInfo">
+<button class="show-code">Code</button>
+void <strong>addStateInfo</strong>(<a href="http://api.dartlang.org/dart_core/Map.html">Map</a> matchState, <a href="http://api.dartlang.org/dart_core/Map.html">Map</a> values) <a class="anchor-link" href="#addStateInfo"
+              title="Permalink to addStateInfo">#</a></h4>
+<div class="doc">
+<p>Useful utility for nesting match states.</p>
+<pre class="source">
+void addStateInfo(Map matchState, Map values) {
+ var innerState = new Map.from(matchState);
+ matchState.clear();
+ matchState['state'] = innerState;
+ matchState.addAll(values);
 }
 </pre>
 </div>
@@ -1190,7 +1206,9 @@ recursion depth
 <span class="param">limit</span> can be provided. The default limit is 100.</p>
 <pre class="source">
 Matcher equals(expected, [limit=100]) =&gt;
-   new _DeepMatcher(expected, limit);
+   expected is String
+       ? new _StringEqualsMatcher(expected) 
+       : new _DeepMatcher(expected, limit);
 </pre>
 </div>
 </div>
@@ -1331,12 +1349,6 @@ Matcher everyElement(matcher) =&gt; new _EveryElement(wrapMatcher(matcher));
           <div class="type">
           <h4>
             <a href="matcher/isInstanceOf.html"><strong>isInstanceOf&lt;T&gt;</strong></a>
-          </h4>
-          </div>
-          
-          <div class="type">
-          <h4>
-            <a href="matcher/MatchState.html"><strong>MatchState</strong></a>
           </h4>
           </div>
           
