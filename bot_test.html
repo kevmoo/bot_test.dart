@@ -36,12 +36,12 @@
             title="Permalink to finishes">#</a>
         </h4>
         <div class="doc">
-<p>Matches a <code>Future</code> that completes successfully with a value. Note that this
+<p>Matches a <a class="crossref" href="dart_async/Future.html">Future</a> that completes successfully with a value. Note that this
 creates an asynchronous expectation. The call to <code>expect()</code> that includes
 this will return immediately and execution will continue. Later, when the
 future completes, the actual expectation will run.</p>
 <p>To test that a Future completes with an exception, you can use <code>throws</code> and
-<code>throwsA</code>.</p>
+<a class="crossref" href="matcher.html#throwsA">throwsA</a>.</p>
 <p>Unlike <code>completes</code> in <code>unittest</code>, exceptions are registered directly with
 the test framework. They are not wrapped.</p>
 <pre class="source">
@@ -96,14 +96,14 @@ final Matcher throwsNullArgumentError =
 <a href="matcher/Matcher.html">Matcher</a> <strong>finishesWith</strong>(matcher) <a class="anchor-link" href="#finishesWith"
               title="Permalink to finishesWith">#</a></h4>
 <div class="doc">
-<p>Matches a <code>Future</code> that completes succesfully with a value that matches
+<p>Matches a <a class="crossref" href="dart_async/Future.html">Future</a> that completes succesfully with a value that matches
 
 <span class="param">matcher</span>. Note that this creates an asynchronous expectation. The call to
 <code>expect()</code> that includes this will return immediately and execution will
 continue. Later, when the future completes, the actual expectation will run.</p>
 <p>To test that a Future completes with an exception, you can use <code>throws</code> and
-<code>throwsA</code>.</p>
-<p>Unlike <code>completion</code> in <code>unittest</code>, exceptions are registered directly with
+<a class="crossref" href="matcher.html#throwsA">throwsA</a>.</p>
+<p>Unlike <a class="crossref" href="matcher.html#completion">completion</a> in <code>unittest</code>, exceptions are registered directly with
 the test framework. They are not wrapped.</p>
 <pre class="source">
 Matcher finishesWith(matcher) =&gt; new _Finishes(wrapMatcher(matcher));
