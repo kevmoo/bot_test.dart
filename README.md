@@ -1,10 +1,10 @@
-![BOT!](https://raw.github.com/kevmoo/bot.dart/master/resource/logo.png)
+![bot_test!](https://raw.github.com/kevmoo/bot.dart/master/resource/logo.png)
 # The Dart Bag-of-Tricks
 ## A collection of (mostly) general libraries to make working with [Dart](http://www.dartlang.org/) more productive.
 
 Starting by porting bits of the [PL javascript library](https://github.com/thinkpixellab/pl) and Google's [Closure javascript library](https://developers.google.com/closure/library/) to enable some interesting scenarios.
 
-[![](https://drone.io/kevmoo/bot.dart/status.png)](https://drone.io/kevmoo/bot.dart/latest)
+[![Build Status](https://drone.io/github.com/kevmoo/bot_test.dart/status.png)](https://drone.io/github.com/kevmoo/bot_test.dart/latest)
 
 # Projects using BOT
 
