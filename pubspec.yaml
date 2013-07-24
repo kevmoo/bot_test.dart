@@ -1,12 +1,13 @@
-name: bot
+name: bot_test
 version: 0.22.3-dev
 author: Kevin Moore <kevin@thinkpixellab.com>
-description: A collection of (mostly) general libraries to make working with Dart more productive.
+description: A collection of general test libraries for Dart
 homepage: https://github.com/kevmoo/bot.dart
 documentation: http://kevmoo.github.io/bot.dart
 environment:
   sdk: '>=0.6.5'
 dependencies:
+  bot: '>=0.22.2'
   meta: '>=0.6.5'
   unittest: '>=0.6.5'
 dev_dependencies:

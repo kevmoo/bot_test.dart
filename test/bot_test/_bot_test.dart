@@ -4,7 +4,7 @@ import 'dart:async';
 import 'dart:isolate';
 import 'package:unittest/unittest.dart';
 import 'package:bot/bot.dart';
-import 'package:bot/bot_test.dart';
+import 'package:bot_test/bot_test.dart';
 
 const _failMessage = 'failing, per request';
 const _successValue = 42;
