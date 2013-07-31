@@ -2,7 +2,7 @@
         <html>
         <head>
                 <meta charset="utf-8">
-        <title>Configuration class / unittest Library / BOT Documentation</title>
+        <title>Configuration class / unittest Library / BOT Test Documentation</title>
         <link rel="stylesheet" type="text/css"
             href="../styles.css">
         <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
@@ -13,7 +13,7 @@
         <div class="page">
         <div class="header">
           <a href="../index.html"><div class="logo"></div></a>
-          <a href="../index.html">BOT Documentation</a>
+          <a href="../index.html">BOT Test Documentation</a>
          &rsaquo; <a href="../unittest.html">unittest</a> &rsaquo; <a href="../unittest/Configuration.html">Configuration</a>        <div id="search-box">
           <input type="search" name="q" id="q" autocomplete="off"
               class="search-input" placeholder="Search API">
@@ -208,7 +208,7 @@ class Configuration {
      String uncaughtError) {
    // Print each test's result.
    for (final t in results) {
-     print(formatResult(t));
+     print(formatResult(t).trim());
    }
 
    // Show the summary.
@@ -481,7 +481,7 @@ void onSummary(int passed, int failed, int errors, List&lt;TestCase&gt; results,
    String uncaughtError) {
  // Print each test's result.
  for (final t in results) {
-   print(formatResult(t));
+   print(formatResult(t).trim());
  }
 
  // Show the summary.
