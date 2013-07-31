@@ -1,5 +1,5 @@
 name: bot_test
-version: 0.1.2-dev
+version: 0.1.2
 author: Kevin Moore <kevin@thinkpixellab.com>
 description: A collection of general test libraries for Dart
 homepage: https://github.com/kevmoo/bot_test.dart
