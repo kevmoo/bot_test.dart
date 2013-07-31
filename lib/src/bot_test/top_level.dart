@@ -75,7 +75,7 @@ Matcher finishes = const _Finishes(null);
  */
 Matcher finishesWith(matcher) => new _Finishes(wrapMatcher(matcher));
 
-class _Finishes extends BaseMatcher {
+class _Finishes extends Matcher {
   final Matcher _matcher;
 
   const _Finishes(this._matcher);
