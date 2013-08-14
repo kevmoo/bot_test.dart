@@ -10,9 +10,6 @@ final Matcher throwsInvalidOperationError =
 final Matcher throwsNullArgumentError =
   const Throws(const _NullArgumentError());
 
-final Matcher throwsAssertionError =
-  const Throws(const _AssertionErrorMatcher());
-
 void expectFutureFail(Future future, [void onException(error)]) {
   assert(future != null);
 
@@ -103,13 +100,6 @@ class _Finishes extends Matcher {
     }
     return description;
   }
-}
-
-class _AssertionErrorMatcher extends TypeMatcher {
-  const _AssertionErrorMatcher() : super("AssertMatcher");
-
-  @override
-  bool matches(item, Map matchState) => item is AssertionError;
 }
 
 class _StateErrorMatcher extends TypeMatcher {

@@ -21,13 +21,6 @@ void main() {
         throw new NullArgumentError('foo');
       }, throwsNullArgumentError);
     });
-
-    test('throwsAssertionError', () {
-      expect(() {
-        throw new AssertionError();
-      }, throwsAssertionError);
-    });
-
   });
 }
 
