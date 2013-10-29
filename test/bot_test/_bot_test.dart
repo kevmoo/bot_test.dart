@@ -1,7 +1,6 @@
 library test_bot_test;
 
 import 'dart:async';
-import 'dart:isolate';
 import 'package:unittest/unittest.dart';
 import 'package:bot/bot.dart';
 import 'package:bot_test/bot_test.dart';
@@ -55,18 +54,8 @@ void _testExpectFutureExceptionWithComplete() {
 }
 
 Future _getFuture(bool shouldFail) {
-  return spawnFunction(_echoIsolate)
-      .call(shouldFail)
-      .then((bool returnedFail) {
-        if(returnedFail) {
-          throw _failMessage;
-        }
-        return _successValue;
-      });
-}
-
-void _echoIsolate() {
-  port.receive((bool input, SendPort replyTo) {
-    replyTo.send(input);
-  });
+  if(shouldFail) {
+    return new Future.error(_failMessage);
+  }
+  return new Future.value(_successValue);
 }
