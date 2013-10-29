@@ -49,19 +49,6 @@ Matcher finishes = const _Finishes(null)
 </pre>
 </div>
 </div>
-<div class="field"><h4 id="throwsAssertionError">
-<button class="show-code">Code</button>
-final <a href="matcher/Matcher.html">Matcher</a>         <strong>throwsAssertionError</strong> <a class="anchor-link"
-            href="#throwsAssertionError"
-            title="Permalink to throwsAssertionError">#</a>
-        </h4>
-        <div class="doc">
-<pre class="source">
-final Matcher throwsAssertionError =
- const Throws(const _AssertionErrorMatcher())
-</pre>
-</div>
-</div>
 <div class="field"><h4 id="throwsInvalidOperationError">
 <button class="show-code">Code</button>
 final <a href="matcher/Matcher.html">Matcher</a>         <strong>throwsInvalidOperationError</strong> <a class="anchor-link"
@@ -123,15 +110,14 @@ void expectFutureComplete(Future future, [Action1 onComplete]) {
    assert(isError != null);
 
    if(isError) {
-     final err = result;
-     registerException(err, getAttachedStackTrace(err));
+     registerException(result[0], result[1]);
    }
 
    if(onComplete != null) {
      onComplete(result);
    }
  });
- future.then((value) =&gt; testWait(false, value), onError: (error) =&gt; testWait(true, error));
+ future.then((value) =&gt; testWait(false, value), onError: (error, stack) =&gt; testWait(true, [error, stack]));
 }
 </pre>
 </div>

@@ -39,25 +39,22 @@ class Builder {
  /// Creates a new path builder for the given style and root directory.
  ///
  /// If [style] is omitted, it uses the host operating system's path style. If
- /// [root] is omitted, it defaults to the current working directory. If [root]
- /// is relative, it is considered relative to the current working directory.
+ /// only [root] is omitted, it defaults ".". If *both* [style] and [root] are
+ /// omitted, [root] defaults to the current working directory.
  ///
  /// On the browser, the path style is [Style.url]. In Dartium, [root] defaults
  /// to the current URL. When using dart2js, it currently defaults to `.` due
  /// to technical constraints.
  factory Builder({Style style, String root}) {
-   if (style == null) {
-     if (_io == null) {
-       style = Style.url;
-     } else if (_io.classes[const Symbol('Platform')]
-         .getField(const Symbol('operatingSystem')).reflectee == 'windows') {
-       style = Style.windows;
+   if (root == null) {
+     if (style == null) {
+       root = current;
      } else {
-       style = Style.posix;
+       root = ".";
      }
    }
 
-   if (root == null) root = current;
+   if (style == null) style = Style.platform;
 
    return new Builder._(style, root);
  }
@@ -508,28 +505,27 @@ factory <strong>Builder</strong>({<a href="../path/Style.html">Style</a> style, 
 <p>Creates a new path builder for the given style and root directory.</p>
 <p>If 
 <span class="param">style</span> is omitted, it uses the host operating system's path style. If
-
-<span class="param">root</span> is omitted, it defaults to the current working directory. If 
-<span class="param">root</span>
-is relative, it is considered relative to the current working directory.</p>
+only 
+<span class="param">root</span> is omitted, it defaults ".". If <em>both</em> 
+<span class="param">style</span> and 
+<span class="param">root</span> are
+omitted, 
+<span class="param">root</span> defaults to the current working directory.</p>
 <p>On the browser, the path style is <a class="crossref" href="../path/Style.html#url">Style.url</a>. In Dartium, 
 <span class="param">root</span> defaults
 to the current URL. When using dart2js, it currently defaults to <code>.</code> due
 to technical constraints.</p>
 <pre class="source">
 factory Builder({Style style, String root}) {
- if (style == null) {
-   if (_io == null) {
-     style = Style.url;
-   } else if (_io.classes[const Symbol('Platform')]
-       .getField(const Symbol('operatingSystem')).reflectee == 'windows') {
-     style = Style.windows;
+ if (root == null) {
+   if (style == null) {
+     root = current;
    } else {
-     style = Style.posix;
+     root = ".";
    }
  }
 
- if (root == null) root = current;
+ if (style == null) style = Style.platform;
 
  return new Builder._(style, root);
 }

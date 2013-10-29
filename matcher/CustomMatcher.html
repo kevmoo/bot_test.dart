@@ -40,23 +40,9 @@ description, and an instance matcher, and should implement the
 while the feature name will just name the feature. For example, we may
 have a Widget class where each Widget has a price; we could make a
 <a class="crossref" href="../matcher/CustomMatcher.html">CustomMatcher</a> that can make assertions about prices with:</p>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; .mine</p>
 <pre><code>class HasPrice extends CustomMatcher {
   const HasPrice(matcher) :
-</code></pre>
-<p>=======</p>
-<pre><code>class HasPrice extends CustomMatcher {
-  HasPrice(matcher) :
-</code></pre>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>.r25321</p></blockquote></blockquote></blockquote></blockquote></blockquote></blockquote></blockquote>
-<pre><code>      super("Widget with price that is", "price", matcher);
+      super("Widget with price that is", "price", matcher);
   featureValueOf(actual) =&gt; actual.price;
 }
 </code></pre>

@@ -67,9 +67,12 @@ class TestCase {
   */
  String get result =&gt; _result;
 
- Trace _stackTrace;
+ /** Returns whether this test case passed. */
+ bool get passed =&gt; _result == PASS;
+
+ StackTrace _stackTrace;
  /** Stack trace associated with this test, or [null] if it succeeded. */
- Trace get stackTrace =&gt; _stackTrace;
+ StackTrace get stackTrace =&gt; _stackTrace;
 
  /** The group (or groups) under which this test is running. */
  final String currentGroup;
@@ -94,7 +97,14 @@ class TestCase {
  bool get isComplete =&gt; !enabled || result != null;
 
  Function _errorHandler(String stage) =&gt; (e) {
-   var stack = getAttachedStackTrace(e);
+   var stack;
+   // TODO(kevmoo): Ideally, getAttachedStackTrace should handle Error as well?
+   // https://code.google.com/p/dart/issues/detail?id=12240
+   if(e is Error) {
+     stack = e.stackTrace;
+   } else {
+     stack = getAttachedStackTrace(e);
+   }
    if (result == null || result == PASS) {
      if (e is TestFailure) {
        fail("$e", stack);
@@ -149,9 +159,10 @@ class TestCase {
 
  // Set the results, notify the config, and return true if this
  // is the first time the result is being set.
- void _setResult(String testResult, String messageText, stack) {
+ void _setResult(String testResult, String messageText, StackTrace stack) {
    _message = messageText;
    _stackTrace = _getTrace(stack);
+   if (_stackTrace == null) _stackTrace = stack;
    if (result == null) {
      _result = testResult;
      _config.onTestResult(this);
@@ -161,7 +172,8 @@ class TestCase {
    }
  }
 
- void _complete(String testResult, [String messageText = '', stack]) {
+ void _complete(String testResult, [String messageText = '',
+     StackTrace stack]) {
    if (runningTime == null) {
      // The startTime can be `null` if an error happened during setup. In this
      // case we simply report a running time of 0.
@@ -183,7 +195,7 @@ class TestCase {
    _complete(PASS);
  }
 
- void fail(String messageText, [stack]) {
+ void fail(String messageText, [StackTrace stack]) {
    if (result != null) {
      String newMessage = (result == PASS)
          ? 'Test failed after initially passing: $messageText'
@@ -195,7 +207,7 @@ class TestCase {
    }
  }
 
- void error(String messageText, [stack]) {
+ void error(String messageText, [StackTrace stack]) {
    _complete(ERROR, messageText, stack);
  }
 
@@ -204,6 +216,8 @@ class TestCase {
      pass();
    }
  }
+
+ String toString() =&gt; _result != null ? "$description: $result" : description;
 }
 </pre>
 </div>
@@ -285,6 +299,19 @@ String get message =&gt; _message;
 </pre>
 </div>
 </div>
+<div class="field"><h4 id="passed">
+<button class="show-code">Code</button>
+final <a href="http://api.dartlang.org/dart_core/bool.html">bool</a>         <strong>passed</strong> <a class="anchor-link"
+            href="#passed"
+            title="Permalink to TestCase.passed">#</a>
+        </h4>
+        <div class="doc">
+<p>Returns whether this test case passed. </p>
+<pre class="source">
+bool get passed =&gt; _result == PASS;
+</pre>
+</div>
+</div>
 <div class="field"><h4 id="result">
 <button class="show-code">Code</button>
 final <a href="http://api.dartlang.org/dart_core/String.html">String</a>         <strong>result</strong> <a class="anchor-link"
@@ -325,14 +352,14 @@ Function setUp
 </div>
 <div class="field"><h4 id="stackTrace">
 <button class="show-code">Code</button>
-final <a href="../trace/Trace.html">Trace</a>         <strong>stackTrace</strong> <a class="anchor-link"
+final <a href="http://api.dartlang.org/dart_core/StackTrace.html">StackTrace</a>         <strong>stackTrace</strong> <a class="anchor-link"
             href="#stackTrace"
             title="Permalink to TestCase.stackTrace">#</a>
         </h4>
         <div class="doc">
 <p>Stack trace associated with this test, or <code>null</code> if it succeeded. </p>
 <pre class="source">
-Trace get stackTrace =&gt; _stackTrace;
+StackTrace get stackTrace =&gt; _stackTrace;
 </pre>
 </div>
 </div>
@@ -379,11 +406,11 @@ TestFunction testFunction
 <h3>Methods</h3>
 <div class="method"><h4 id="error">
 <button class="show-code">Code</button>
-void <strong>error</strong>(<a href="http://api.dartlang.org/dart_core/String.html">String</a> messageText, [stack]) <a class="anchor-link" href="#error"
+void <strong>error</strong>(<a href="http://api.dartlang.org/dart_core/String.html">String</a> messageText, [<a href="http://api.dartlang.org/dart_core/StackTrace.html">StackTrace</a> stack]) <a class="anchor-link" href="#error"
               title="Permalink to TestCase.error">#</a></h4>
 <div class="doc">
 <pre class="source">
-void error(String messageText, [stack]) {
+void error(String messageText, [StackTrace stack]) {
  _complete(ERROR, messageText, stack);
 }
 </pre>
@@ -391,11 +418,11 @@ void error(String messageText, [stack]) {
 </div>
 <div class="method"><h4 id="fail">
 <button class="show-code">Code</button>
-void <strong>fail</strong>(<a href="http://api.dartlang.org/dart_core/String.html">String</a> messageText, [stack]) <a class="anchor-link" href="#fail"
+void <strong>fail</strong>(<a href="http://api.dartlang.org/dart_core/String.html">String</a> messageText, [<a href="http://api.dartlang.org/dart_core/StackTrace.html">StackTrace</a> stack]) <a class="anchor-link" href="#fail"
               title="Permalink to TestCase.fail">#</a></h4>
 <div class="doc">
 <pre class="source">
-void fail(String messageText, [stack]) {
+void fail(String messageText, [StackTrace stack]) {
  if (result != null) {
    String newMessage = (result == PASS)
        ? 'Test failed after initially passing: $messageText'
@@ -418,6 +445,19 @@ void <strong>pass</strong>() <a class="anchor-link" href="#pass"
 void pass() {
  _complete(PASS);
 }
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="toString">
+<button class="show-code">Code</button>
+<a href="http://api.dartlang.org/dart_core/String.html">String</a> <strong>toString</strong>() <a class="anchor-link" href="#toString"
+              title="Permalink to TestCase.toString">#</a></h4>
+<div class="doc">
+<div class="inherited">
+<p>Returns a string representation of this object.</p>
+<div class="docs-inherited-from">docs inherited from <a href="http://api.dartlang.org/dart_core/Object.html">Object</a> </div></div>
+<pre class="source">
+String toString() =&gt; _result != null ? "$description: $result" : description;
 </pre>
 </div>
 </div>

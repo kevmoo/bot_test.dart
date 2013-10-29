@@ -79,7 +79,8 @@ class Frame {
 
  /// A human-friendly description of the code location.
  String get location {
-   if (line == null || column == null) return library;
+   if (line == null) return library;
+   if (column == null) return '$library $line';
    return '$library $line:$column';
  }
 
@@ -99,14 +100,28 @@ class Frame {
 
  /// Parses a string representation of a Dart VM stack frame.
  factory Frame.parseVM(String frame) {
+   // The VM sometimes folds multiple stack frames together and replaces them
+   // with "...".
+   if (frame == '...') {
+     return new Frame(new Uri(), null, null, '...');
+   }
+
    var match = _vmFrame.firstMatch(frame);
    if (match == null) {
      throw new FormatException("Couldn't parse VM stack trace line '$frame'.");
    }
 
-   var uri = Uri.parse(match[2]);
+   // Get the pieces out of the regexp match. Function, URI and line should
+   // always be found. The column is optional.
    var member = match[1].replaceAll("&lt;anonymous closure&gt;", "&lt;fn&gt;");
-   return new Frame(uri, int.parse(match[3]), int.parse(match[4]), member);
+   var uri = Uri.parse(match[2]);
+   var line = int.parse(match[3]);
+   var column = null;
+   var columnMatch = match[4];
+   if (columnMatch != null) {
+     column = int.parse(columnMatch);
+   }
+   return new Frame(uri, line, column, member);
  }
 
  /// Parses a string representation of a Chrome/V8 stack frame.
@@ -130,6 +145,12 @@ class Frame {
    }
  }
 
+ /// Parses a string representation of an IE stack frame.
+ ///
+ /// IE10+ frames look just like V8 frames. Prior to IE10, stack traces can't
+ /// be retrieved.
+ factory Frame.parseIE(String frame) =&gt; new Frame.parseV8(frame);
+
  /// Parses a string representation of a Firefox stack frame.
  factory Frame.parseFirefox(String frame) {
    var match = _firefoxFrame.firstMatch(frame);
@@ -140,16 +161,20 @@ class Frame {
 
    var uri = Uri.parse(match[3]);
    var member = match[1];
-   if (member == "") {
-     member = "&lt;fn&gt;";
-   } else if (match[2] != null) {
-     member = "$member.&lt;fn&gt;";
-   }
+   member += new List.filled('/'.allMatches(match[2]).length, ".&lt;fn&gt;").join();
+   if (member == '') member = '&lt;fn&gt;';
+
    // Some Firefox members have initial dots. We remove them for consistency
    // with other platforms.
    member = member.replaceFirst(_initialDot, '');
    return new Frame(uri, int.parse(match[4]), null, member);
  }
+
+ /// Parses a string representation of a Safari stack frame.
+ ///
+ /// Safari 6+ frames look just like Firefox frames. Prior to Safari 6, stack
+ /// traces can't be retrieved.
+ factory Frame.parseSafari(String frame) =&gt; new Frame.parseFirefox(frame);
 
  /// Parses this package's string representation of a stack frame.
  factory Frame.parseFriendly(String frame) {
@@ -234,11 +259,9 @@ factory Frame.parseFirefox(String frame) {
 
  var uri = Uri.parse(match[3]);
  var member = match[1];
- if (member == "") {
-   member = "&lt;fn&gt;";
- } else if (match[2] != null) {
-   member = "$member.&lt;fn&gt;";
- }
+ member += new List.filled('/'.allMatches(match[2]).length, ".&lt;fn&gt;").join();
+ if (member == '') member = '&lt;fn&gt;';
+
  // Some Firefox members have initial dots. We remove them for consistency
  // with other platforms.
  member = member.replaceFirst(_initialDot, '');
@@ -272,6 +295,32 @@ factory Frame.parseFriendly(String frame) {
  var column = match[3] == null ? null : int.parse(match[3]);
  return new Frame(uri, line, column, match[4]);
 }
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="parseIE">
+<button class="show-code">Code</button>
+factory <strong>Frame.parseIE</strong>(<a href="http://api.dartlang.org/dart_core/String.html">String</a> frame) <a class="anchor-link" href="#parseIE"
+              title="Permalink to Frame.Frame.parseIE">#</a></h4>
+<div class="doc">
+<p>Parses a string representation of an IE stack frame.</p>
+<p>IE10+ frames look just like V8 frames. Prior to IE10, stack traces can't
+be retrieved.</p>
+<pre class="source">
+factory Frame.parseIE(String frame) =&gt; new Frame.parseV8(frame);
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="parseSafari">
+<button class="show-code">Code</button>
+factory <strong>Frame.parseSafari</strong>(<a href="http://api.dartlang.org/dart_core/String.html">String</a> frame) <a class="anchor-link" href="#parseSafari"
+              title="Permalink to Frame.Frame.parseSafari">#</a></h4>
+<div class="doc">
+<p>Parses a string representation of a Safari stack frame.</p>
+<p>Safari 6+ frames look just like Firefox frames. Prior to Safari 6, stack
+traces can't be retrieved.</p>
+<pre class="source">
+factory Frame.parseSafari(String frame) =&gt; new Frame.parseFirefox(frame);
 </pre>
 </div>
 </div>
@@ -312,14 +361,28 @@ factory <strong>Frame.parseVM</strong>(<a href="http://api.dartlang.org/dart_cor
 <p>Parses a string representation of a Dart VM stack frame.</p>
 <pre class="source">
 factory Frame.parseVM(String frame) {
+ // The VM sometimes folds multiple stack frames together and replaces them
+ // with "...".
+ if (frame == '...') {
+   return new Frame(new Uri(), null, null, '...');
+ }
+
  var match = _vmFrame.firstMatch(frame);
  if (match == null) {
    throw new FormatException("Couldn't parse VM stack trace line '$frame'.");
  }
 
- var uri = Uri.parse(match[2]);
+ // Get the pieces out of the regexp match. Function, URI and line should
+ // always be found. The column is optional.
  var member = match[1].replaceAll("&lt;anonymous closure&gt;", "&lt;fn&gt;");
- return new Frame(uri, int.parse(match[3]), int.parse(match[4]), member);
+ var uri = Uri.parse(match[2]);
+ var line = int.parse(match[3]);
+ var column = null;
+ var columnMatch = match[4];
+ if (columnMatch != null) {
+   column = int.parse(columnMatch);
+ }
+ return new Frame(uri, line, column, member);
 }
 </pre>
 </div>
@@ -399,7 +462,8 @@ final <a href="http://api.dartlang.org/dart_core/String.html">String</a>        
 <p>A human-friendly description of the code location.</p>
 <pre class="source">
 String get location {
- if (line == null || column == null) return library;
+ if (line == null) return library;
+ if (column == null) return '$library $line';
  return '$library $line:$column';
 }
 </pre>

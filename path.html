@@ -72,15 +72,26 @@ return the current URL.</p>
 <pre class="source">
 String get current {
  if (_io != null) {
-   return _io.classes[const Symbol('Directory')]
-       .getField(const Symbol('current')).reflectee.path;
+   return _io.classes[#Directory].getField(#current).reflectee.path;
  } else if (_html != null) {
-   return _html.getField(const Symbol('window'))
-       .reflectee.location.href;
+   return _html.getField(#window).reflectee.location.href;
  } else {
    return '.';
  }
 }
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="posix">
+<button class="show-code">Code</button>
+final         <strong>posix</strong> <a class="anchor-link"
+            href="#posix"
+            title="Permalink to posix">#</a>
+        </h4>
+        <div class="doc">
+<p>A default builder for manipulating POSIX paths.</p>
+<pre class="source">
+final posix = new Builder(style: Style.posix)
 </pre>
 </div>
 </div>
@@ -95,6 +106,32 @@ final <a href="http://api.dartlang.org/dart_core/String.html">String</a>        
 and <code>/</code> on other platforms (including the browser).</p>
 <pre class="source">
 String get separator =&gt; _builder.separator;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="url">
+<button class="show-code">Code</button>
+final         <strong>url</strong> <a class="anchor-link"
+            href="#url"
+            title="Permalink to url">#</a>
+        </h4>
+        <div class="doc">
+<p>A default builder for manipulating URLs.</p>
+<pre class="source">
+final url = new Builder(style: Style.url)
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="windows">
+<button class="show-code">Code</button>
+final         <strong>windows</strong> <a class="anchor-link"
+            href="#windows"
+            title="Permalink to windows">#</a>
+        </h4>
+        <div class="doc">
+<p>A default builder for manipulating Windows paths.</p>
+<pre class="source">
+final windows = new Builder(style: Style.windows)
 </pre>
 </div>
 </div>

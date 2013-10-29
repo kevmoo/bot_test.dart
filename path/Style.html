@@ -54,6 +54,24 @@ abstract class Style {
  /// `file://`) or with "/".
  static final url = new _UrlStyle();
 
+ /// The style of the host platform.
+ ///
+ /// When running on the command line, this will be [windows] or [posix] based
+ /// on the host operating system. On a browser, this will be [url].
+ static final platform = _getPlatformStyle();
+
+ /// Gets the type of the host platform.
+ static Style _getPlatformStyle() {
+   if (_io == null) return Style.url;
+
+   if (_io.classes[#Platform].getField(#operatingSystem)
+       .reflectee == 'windows') {
+     return Style.windows;
+   }
+
+   return Style.posix;
+ }
+
  /// The name of this path style. Will be "posix" or "windows".
  String get name;
 
@@ -126,6 +144,21 @@ abstract class Style {
 </div>
 <div>
 <h3>Static Properties</h3>
+<div class="field"><h4 id="platform">
+<button class="show-code">Code</button>
+final         <strong>platform</strong> <a class="anchor-link"
+            href="#platform"
+            title="Permalink to Style.platform">#</a>
+        </h4>
+        <div class="doc">
+<p>The style of the host platform.</p>
+<p>When running on the command line, this will be <a class="crossref" href="../path/Style.html#windows">windows</a> or <a class="crossref" href="../path/Style.html#posix">posix</a> based
+on the host operating system. On a browser, this will be <a class="crossref" href="../path/Style.html#url">url</a>.</p>
+<pre class="source">
+static final platform = _getPlatformStyle()
+</pre>
+</div>
+</div>
 <div class="field"><h4 id="posix">
 <button class="show-code">Code</button>
 final         <strong>posix</strong> <a class="anchor-link"
