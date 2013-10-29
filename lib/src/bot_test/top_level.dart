@@ -33,15 +33,14 @@ void expectFutureComplete(Future future, [Action1 onComplete]) {
     assert(isError != null);
 
     if(isError) {
-      final err = result;
-      registerException(err, getAttachedStackTrace(err));
+      registerException(result[0], result[1]);
     }
 
     if(onComplete != null) {
       onComplete(result);
     }
   });
-  future.then((value) => testWait(false, value), onError: (error) => testWait(true, error));
+  future.then((value) => testWait(false, value), onError: (error, stack) => testWait(true, [error, stack]));
 }
 
 /**
@@ -84,8 +83,8 @@ class _Finishes extends Matcher {
 
     item.then((value) {
       done(() { if (_matcher != null) expect(value, _matcher); });
-    }, onError: (error) {
-      done(() => registerException(error, getAttachedStackTrace(error)));
+    }, onError: (error, StackTrace stack) {
+      done(() => registerException(error, stack));
     });
 
     return true;
