@@ -1,5 +1,10 @@
 # Changelog - Dart Bag of Tricks - Test
 
+## 0.1.3 2013-10-29 (SDK 0.8.7 r29341)
+
+* Latest SDK
+* A lot of cleanup
+
 ## 0.1.2 2013-07-30 (SDK 0.6.13 r25630)
 
 * Fixes for latest SDK
