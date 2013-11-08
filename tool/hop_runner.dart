@@ -8,7 +8,7 @@ import '../test/harness_console.dart' as test_console;
 
 import 'package:hop/src/hop_tasks_experimental.dart' as dartdoc;
 
-void main() {
+void main(List<String> args) {
   // Easy to enable hop-wide logging
   // enableScriptLogListener();
 
@@ -31,7 +31,7 @@ void main() {
 
   addTask('dart2js', createDartCompilerTask(paths, liveTypeAnalysis: true));
 
-  runHop();
+  runHop(args);
 }
 
 Future<List<String>> _getLibs() {
