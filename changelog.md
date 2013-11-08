@@ -1,5 +1,10 @@
 # Changelog - Dart Bag of Tricks - Test
 
+## 0.1.4 2013-11-07 (SDK 0.8.10+6 r30036)
+
+* Lastest SDK
+* Aligned with [Dart V1 Pubspec Recommendations](https://plus.google.com/+SethLadd/posts/9JQJVz78R97).
+
 ## 0.1.3 2013-10-29 (SDK 0.8.7 r29341)
 
 * Latest SDK
