@@ -31,17 +31,17 @@
 <h3>Properties</h3>
 <div class="field"><h4 id="finishes">
 <button class="show-code">Code</button>
-<a href="matcher/Matcher.html">Matcher</a>         <strong>finishes</strong> <a class="anchor-link"
+<a href="unittest.matcher/Matcher.html">Matcher</a>         <strong>finishes</strong> <a class="anchor-link"
             href="#finishes"
             title="Permalink to finishes">#</a>
         </h4>
         <div class="doc">
-<p>Matches a <a class="crossref" href="dart_async/Future.html">Future</a> that completes successfully with a value. Note that this
+<p>Matches a <a class="crossref" href="http://api.dartlang.org/dart_async/Future.html">Future</a> that completes successfully with a value. Note that this
 creates an asynchronous expectation. The call to <code>expect()</code> that includes
 this will return immediately and execution will continue. Later, when the
 future completes, the actual expectation will run.</p>
 <p>To test that a Future completes with an exception, you can use <code>throws</code> and
-<a class="crossref" href="matcher.html#throwsA">throwsA</a>.</p>
+<a class="crossref" href="unittest.matcher.html#throwsA">throwsA</a>.</p>
 <p>Unlike <code>completes</code> in <code>unittest</code>, exceptions are registered directly with
 the test framework. They are not wrapped.</p>
 <pre class="source">
@@ -51,7 +51,7 @@ Matcher finishes = const _Finishes(null)
 </div>
 <div class="field"><h4 id="throwsInvalidOperationError">
 <button class="show-code">Code</button>
-final <a href="matcher/Matcher.html">Matcher</a>         <strong>throwsInvalidOperationError</strong> <a class="anchor-link"
+final <a href="unittest.matcher/Matcher.html">Matcher</a>         <strong>throwsInvalidOperationError</strong> <a class="anchor-link"
             href="#throwsInvalidOperationError"
             title="Permalink to throwsInvalidOperationError">#</a>
         </h4>
@@ -64,7 +64,7 @@ final Matcher throwsInvalidOperationError =
 </div>
 <div class="field"><h4 id="throwsNullArgumentError">
 <button class="show-code">Code</button>
-final <a href="matcher/Matcher.html">Matcher</a>         <strong>throwsNullArgumentError</strong> <a class="anchor-link"
+final <a href="unittest.matcher/Matcher.html">Matcher</a>         <strong>throwsNullArgumentError</strong> <a class="anchor-link"
             href="#throwsNullArgumentError"
             title="Permalink to throwsNullArgumentError">#</a>
         </h4>
@@ -80,17 +80,17 @@ final Matcher throwsNullArgumentError =
 <h3>Functions</h3>
 <div class="method"><h4 id="finishesWith">
 <button class="show-code">Code</button>
-<a href="matcher/Matcher.html">Matcher</a> <strong>finishesWith</strong>(matcher) <a class="anchor-link" href="#finishesWith"
+<a href="unittest.matcher/Matcher.html">Matcher</a> <strong>finishesWith</strong>(matcher) <a class="anchor-link" href="#finishesWith"
               title="Permalink to finishesWith">#</a></h4>
 <div class="doc">
-<p>Matches a <a class="crossref" href="dart_async/Future.html">Future</a> that completes succesfully with a value that matches
+<p>Matches a <a class="crossref" href="http://api.dartlang.org/dart_async/Future.html">Future</a> that completes succesfully with a value that matches
 
 <span class="param">matcher</span>. Note that this creates an asynchronous expectation. The call to
 <code>expect()</code> that includes this will return immediately and execution will
 continue. Later, when the future completes, the actual expectation will run.</p>
 <p>To test that a Future completes with an exception, you can use <code>throws</code> and
-<a class="crossref" href="matcher.html#throwsA">throwsA</a>.</p>
-<p>Unlike <a class="crossref" href="matcher.html#completion">completion</a> in <code>unittest</code>, exceptions are registered directly with
+<a class="crossref" href="unittest.matcher.html#throwsA">throwsA</a>.</p>
+<p>Unlike <a class="crossref" href="unittest.matcher.html#completion">completion</a> in <code>unittest</code>, exceptions are registered directly with
 the test framework. They are not wrapped.</p>
 <pre class="source">
 Matcher finishesWith(matcher) =&gt; new _Finishes(wrapMatcher(matcher));
@@ -99,7 +99,7 @@ Matcher finishesWith(matcher) =&gt; new _Finishes(wrapMatcher(matcher));
 </div>
 <div class="method"><h4 id="expectFutureComplete">
 <button class="show-code">Code</button>
-void <strong>expectFutureComplete</strong>(<a href="http://api.dartlang.org/dart_async/Future.html">Future</a> future, [<a href="bot/Action1.html">Action1</a> onComplete]) <a class="anchor-link" href="#expectFutureComplete"
+void <strong>expectFutureComplete</strong>(<a href="http://api.dartlang.org/dart_async/Future.html" ref="external">Future</a> future, [<a href="bot.typedefs/Action1.html">Action1</a> onComplete]) <a class="anchor-link" href="#expectFutureComplete"
               title="Permalink to expectFutureComplete">#</a></h4>
 <div class="doc">
 <pre class="source">
@@ -124,7 +124,7 @@ void expectFutureComplete(Future future, [Action1 onComplete]) {
 </div>
 <div class="method"><h4 id="expectFutureFail">
 <button class="show-code">Code</button>
-void <strong>expectFutureFail</strong>(<a href="http://api.dartlang.org/dart_async/Future.html">Future</a> future, [void onException(error)]) <a class="anchor-link" href="#expectFutureFail"
+void <strong>expectFutureFail</strong>(<a href="http://api.dartlang.org/dart_async/Future.html" ref="external">Future</a> future, [void onException(error)]) <a class="anchor-link" href="#expectFutureFail"
               title="Permalink to expectFutureFail">#</a></h4>
 <div class="doc">
 <pre class="source">
