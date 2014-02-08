@@ -1,5 +1,13 @@
 # Changelog - Dart Bag of Tricks - Test
 
+## 0.1.5+1 2014-02-07 (SDK 1.2.0-dev.3.2 r32242)
+
+* Updated max dependency values
+
+## 0.1.5 2013-11-07
+
+* SNAFU with SDK version and hop
+
 ## 0.1.4 2013-11-07 (SDK 0.8.10+6 r30036)
 
 * Lastest SDK
