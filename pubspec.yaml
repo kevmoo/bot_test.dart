@@ -1,5 +1,5 @@
 name: bot_test
-version: 0.1.5+1
+version: 0.1.6-dev
 author: Kevin Moore <github@j832.com>
 description: A collection of general test libraries for Dart
 homepage: https://github.com/kevmoo/bot_test.dart
@@ -11,5 +11,6 @@ dependencies:
   unittest: '>=0.9.0 <0.11.0'
 dev_dependencies:
   browser: '>=0.9.0 <0.10.0'
-  hop: '>=0.28.1+2'
+  hop: '>=0.30.0 <0.31.0'
+  hop_docgen: '>=0.1.1 <0.2.0'
   path: '>=0.9.0 <2.0.0'
