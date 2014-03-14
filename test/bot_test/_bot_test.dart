@@ -30,7 +30,7 @@ void _testExpectFutureComplete() {
 }
 
 void _testExpectFutureCompleteWithComplete() {
-  final onComplete = expectAsync1((value) {
+  final onComplete = expectAsync((value) {
     expect(value, _successValue);
   });
   expectFutureComplete(_getFuture(false), onComplete);
@@ -45,7 +45,7 @@ void _testExpectFutureException() {
 }
 
 void _testExpectFutureExceptionWithComplete() {
-  final onFail = expectAsync1((error) {
+  final onFail = expectAsync((error) {
     expect(error, _failMessage);
   });
   expectFutureFail(_getFuture(true), onFail);
