@@ -10,10 +10,16 @@ final Matcher throwsInvalidOperationError =
 final Matcher throwsNullArgumentError =
   const Throws(const _NullArgumentError());
 
+/**
+ * **DEPRECATED**
+ *
+ * Use [throws] or [throwsA] from `unittest` instead.
+ */
+@deprecated
 void expectFutureFail(Future future, [void onException(error)]) {
   assert(future != null);
 
-  final testWait = expectAsync2((bool isError, result) {
+  final testWait = expectAsync((bool isError, result) {
     assert(isError != null);
 
     if(!isError) {
@@ -26,10 +32,16 @@ void expectFutureFail(Future future, [void onException(error)]) {
   future.then((value) => testWait(false, value), onError: (error) => testWait(true, error));
 }
 
+/**
+ * **DEPRECATED**
+ *
+ * Use [completes] or [completion] from `unittest` instead.
+ */
+@deprecated
 void expectFutureComplete(Future future, [Action1 onComplete]) {
   assert(future != null);
 
-  final testWait = expectAsync2((bool isError, result) {
+  final testWait = expectAsync((bool isError, result) {
     assert(isError != null);
 
     if(isError) {
@@ -44,31 +56,19 @@ void expectFutureComplete(Future future, [Action1 onComplete]) {
 }
 
 /**
- * Matches a [Future] that completes successfully with a value. Note that this
- * creates an asynchronous expectation. The call to `expect()` that includes
- * this will return immediately and execution will continue. Later, when the
- * future completes, the actual expectation will run.
+ * **DEPRECATED**
  *
- * To test that a Future completes with an exception, you can use [throws] and
- * [throwsA].
- *
- * Unlike [completes] in `unittest`, exceptions are registered directly with
- * the test framework. They are not wrapped.
+ * Use [completion] from `unittest` instead.
  */
+@deprecated
 Matcher finishes = const _Finishes(null);
 
 /**
- * Matches a [Future] that completes succesfully with a value that matches
- * [matcher]. Note that this creates an asynchronous expectation. The call to
- * `expect()` that includes this will return immediately and execution will
- * continue. Later, when the future completes, the actual expectation will run.
+ * **DEPRECATED**
  *
- * To test that a Future completes with an exception, you can use [throws] and
- * [throwsA].
- *
- * Unlike [completion] in `unittest`, exceptions are registered directly with
- * the test framework. They are not wrapped.
+ * Use [completes] from `unittest` instead.
  */
+@deprecated
 Matcher finishesWith(matcher) => new _Finishes(wrapMatcher(matcher));
 
 class _Finishes extends Matcher {
@@ -99,13 +99,6 @@ class _Finishes extends Matcher {
     }
     return description;
   }
-}
-
-class _StateErrorMatcher extends TypeMatcher {
-  const _StateErrorMatcher() : super("StateErrorMatcher");
-
-  @override
-  bool matches(item, Map matchState) => item is StateError;
 }
 
 class _InvalidOperationError extends TypeMatcher {
