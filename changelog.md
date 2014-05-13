@@ -1,4 +1,7 @@
-# Changelog - Dart Bag of Tricks - Test
+## 0.1.6
+
+* Deprecated `expectFutureFail`, `expectFutureComplete`, `finishes`, `finishesWith`
+* Updated dependencies
 
 ## 0.1.5+1 2014-02-07 (SDK 1.2.0-dev.3.2 r32242)
 
