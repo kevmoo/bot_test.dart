@@ -1,3 +1,7 @@
+## 0.2.0
+
+* Removed deprecated members.
+
 ## 0.1.6
 
 * Deprecated `expectFutureFail`, `expectFutureComplete`, `finishes`, `finishesWith`
