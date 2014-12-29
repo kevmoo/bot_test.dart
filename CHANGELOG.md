@@ -1,3 +1,8 @@
+## 0.2.0+1
+
+* Updated `bot` dependency.
+* Fixed pubspec.
+
 ## 0.2.0
 
 * Removed deprecated members.
